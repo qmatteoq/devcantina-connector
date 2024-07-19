@@ -1,8 +1,10 @@
-# Microsoft Graph connector
+# Microsoft Graph connector for The Developer's Cantina
 
 This project contains a [Microsoft Graph connector](https://learn.microsoft.com/graph/connecting-external-content-connectors-overview). Using Graph connectors you can import external data into Microsoft 365 and Microsoft Search. Ingested content is available to Microsoft Copilot for Microsoft 365, Microsoft Search and other Microsoft 365 services.
 
 When developing the Graph connector, you can use [Dev Proxy](https://aka.ms/devproxy) to simulate Microsoft Graph API responses. This allows you to develop and test the connector without having to connect to the Microsoft Graph API and wait for the connection to be provisioned/removed.
+
+This sample project implements a Graph Connector to ingest the articles published on [The Developer's Cantina](https://www.developerscantina.com).
 
 ## Minimal path to awesome
 
@@ -16,14 +18,6 @@ When developing the Graph connector, you can use [Dev Proxy](https://aka.ms/devp
     ./setup.ps1
     ```
 - Restore dependencies: `npm install`
-- Complete project
-  - In `config.ts`:
-    - Complete schema definition
-    - Define URL to item resolvers (optional but recommended)
-  - In `loadContent.ts`:
-    - Implement the `loadContent` function to load content to import
-    - Implement the `getDocId` function to generate a unique ID for each document
-    - Update the `transform` function that convert documents from the external system into Microsoft Graph external items, with the schema you defined previously
 - Build project: `npm run build`
 - Create connection: `npm run start:createConnection`
 - Load content: `npm run start:loadContent`
