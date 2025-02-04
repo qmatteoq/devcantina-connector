@@ -1,54 +1,67 @@
 {
     "type": "AdaptiveCard",
+    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
     "version": "1.3",
     "body": [
         {
-            "type": "ColumnSet",
-            "columns": [               
+            "type": "Container",
+            "items": [
                 {
-                    "type": "Column",
-                    "width": "stretch",
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "auto",
+                            "items": [
+                                {
+                                    "type": "Image",
+                                    "url": "https://www.developerscantina.com/img/logo_huc13ceb6723b354837e5bcdde1a28bafe_834555_300x0_resize_box_3.png",
+                                    "width": "32px",
+                                    "height": "32px"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "TextBlock",
+                                    "text": "[${title}](${url})",
+                                    "style": "default",
+                                    "size": "Medium",
+                                    "weight": "Default",
+                                    "isSubtle": false,
+                                    "spacing": "Medium",
+                                    "horizontalAlignment": "Center",
+                                    "color": "Accent"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
                     "items": [
                         {
-                            "type": "ColumnSet",
-                            "columns": [
-                                {
-                                    "type": "Column",
-                                    "width": "auto",
-                                    "items": [
-                                        {
-                                            "type": "TextBlock",
-                                            "text": "[${title}](${url})",
-                                            "weight": "Bolder",
-                                            "size": "Medium",
-                                            "maxLines": 3,
-                                            "color": "Accent"
-                                        }
-                                    ],
-                                    "spacing": "None"
-                                }
-                            ],
-                            "spacing": "Small"
-                        },
-                        {
                             "type": "TextBlock",
-                            "text": "[${url}](${url})",
-                            "spacing": "Small",
-                            "weight": "Bolder",
-                            "color": "Dark"
-                        },
-                        {
-                            "type": "TextBlock",
-                            "text": "${$description}",
-                            "maxLines": 2,
+                            "text": "${description}",
                             "wrap": true,
-                            "spacing": "Small"
+                            "spacing": "Large",
+                            "isSubtle": true,
+                            "maxLines": 4,
+                            "size": "Default"
+                        },
+                        {
+                            "type": "Image",
+                            "url": "${image}"
                         }
                     ],
+                    "separator": true,
                     "spacing": "Medium"
                 }
-            ]
+            ],
+            "style": "emphasis"
         }
-    ],
-    "$schema": "http://adaptivecards.io/schemas/adaptive-card.json"
+    ]
 }

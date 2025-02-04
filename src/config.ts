@@ -65,6 +65,11 @@ export const config = {
           labels: [
             'iconUrl'
           ]
+        },
+        {
+          name: 'imageUrl',
+          type: 'String',
+          isRetrievable: true
         }
       ]
     }

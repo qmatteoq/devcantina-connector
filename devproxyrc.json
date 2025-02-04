@@ -6,6 +6,12 @@
       "enabled": true,
       "pluginPath": "~appFolder/plugins/dev-proxy-plugins.dll",
       "configSection": "graphConnectorMocks"
+    },
+    {
+      "name": "DevToolsPlugin",
+      "enabled": true,
+      "pluginPath": "~appFolder/plugins/dev-proxy-plugins.dll",
+      "configSection": "devTools"
     }
   ],
   "urlsToWatch": [
@@ -20,5 +26,8 @@
   ],
   "graphConnectorMocks": {
     "mocksFile": ".devproxy/graph-connector-mocks.json"
+  },
+  "devTools": {
+    "preferredBrowser": "Edge"
   }
 }

@@ -53,7 +53,7 @@ async function createSchema(): Promise<void> {
 
 async function main() {
   try {
-    await createConnection();
+    // await createConnection();
     await createSchema();
   }
   catch (e) {

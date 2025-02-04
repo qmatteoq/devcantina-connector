@@ -14,6 +14,14 @@ interface Document {
   url: string;
   // URL to the document icon. Required by Microsoft Copilot for Microsoft 365
   iconUrl: string;
+  //Document description
+  description: string;
+  // URL to the post image
+  image: string;
+}
+
+function stripHtmlTags(str: string): string {
+  return str.replace(/<\/?[^>]+(>|$)/g, "");
 }
 
 async function extract(): Promise<Document[]> {
@@ -22,12 +30,27 @@ async function extract(): Promise<Document[]> {
   const rssText = await response.text();
   const rssJson = await parseStringPromise(rssText);
 
-  const documents: Document[] = rssJson.rss.channel[0].item.map((item: any) => ({
-    title: item.title[0],
-    content: item.description[0],
-    url: item.link[0],
-    iconUrl: item['media:thumbnail'] ? item['media:thumbnail'][0].$.url : ''
-  }));
+  const documents: Document[] = rssJson.rss.channel[0].item.map((item: any) => {
+    const description = item.description[0];
+    let imageUrl = '';
+
+    // Extract image URL from description
+    const imgTagMatch = description.match(/<img[^>]+src="([^">]+)"/);
+    if (imgTagMatch && imgTagMatch[1]) {
+      imageUrl = imgTagMatch[1];
+    }
+
+    const cleanDescription = stripHtmlTags(description);
+
+    return {
+      title: item.title[0],
+      content: description,
+      url: item.link[0],
+      iconUrl: item['media:thumbnail'] ? item['media:thumbnail'][0].$.url : '',
+      description: cleanDescription.length >= 250 ? "..." + cleanDescription.substring(250, 600) + "..." : " ..." + cleanDescription + "...",
+      image: imageUrl
+    };
+  });
 
   return documents;
 }
@@ -56,7 +79,9 @@ function transform(documents: Document[]): ExternalConnectors.ExternalItem[] {
         // Add properties as defined in the schema in config.ts
         title: doc.title ?? '',
         url: doc.url,
-        iconUrl: doc.iconUrl
+        iconUrl: doc.iconUrl,
+        description: doc.description,
+        imageUrl: doc.image
       },
       content: {
         value: doc.content ?? '',
