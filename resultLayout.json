@@ -54,7 +54,7 @@
                         },
                         {
                             "type": "Image",
-                            "url": "${image}"
+                            "url": "${imageUrl}"
                         }
                     ],
                     "separator": true,
